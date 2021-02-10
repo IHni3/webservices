@@ -31,14 +31,14 @@ public class StocksController {
         getStocksUseCase = new GetStocksUseCase(dataProvider);
     }
 
-    @RequestMapping(value = "/stock")
+    @RequestMapping(value = "/stocks", method = RequestMethod.GET)
     public ResponseEntity<List<Stock>> getAll()
     {
         List<Stock> personList = getStocksUseCase.findAll();
         return new ResponseEntity<>(personList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/stock/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/stocks/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Stock> delete(@PathVariable("id") UUID id)
     {
         Optional<Stock> stockOptional = getStocksUseCase.findById(id);
@@ -49,7 +49,7 @@ public class StocksController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @RequestMapping(value = "/stock", method = RequestMethod.PUT)
+    @RequestMapping(value = "/stocks", method = RequestMethod.PUT)
     public ResponseEntity<Stock> put(@RequestBody Stock stock)
     {
         Stock savedPerson = createStockUseCase.create(stock);
