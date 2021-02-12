@@ -12,6 +12,6 @@ namespace IdentityManagement.Models
         {
         }
 
-        public DbSet<UserEntry> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
