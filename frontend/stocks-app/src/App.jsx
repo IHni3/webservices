@@ -27,9 +27,7 @@ function App() {
           <Route path="/stocks">
             <OverviewView />
           </Route>
-          <Route path="/stock/:id">
-            <SingleStockView />
-          </Route>
+          <Route path="/stock/:id" component={SingleStockView} />
         </Switch>
       </BrowserRouter>
     </div>

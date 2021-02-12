@@ -15,9 +15,11 @@ import { Page } from "../../Page/Page";
 
 import "./style.scss";
 
-export const SingleStockView = () => {
+export const SingleStockView = (props) => {
+  const id = props.match.params.id;
   return (
     <div style={{ width: "100%", height: "100%" }}>
+      {id}
       <header>
         <SingleStockMenubar />
       </header>
