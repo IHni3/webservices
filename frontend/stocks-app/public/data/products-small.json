@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "period": "1 month",
+      "absolute": "16%",
+      "peranno": "16%"
+    },
+    {
+      "period": "3 months",
+      "absolute": "17%",
+      "peranno": "0%"
+    },
+    {
+      "period": "6 months",
+      "absolute": "14%",
+      "peranno": "9%"
+    },
+    {
+      "period": "1 year",
+      "absolute": "3%",
+      "peranno": "4%"
+    },
+    {
+      "period": "10 years",
+      "absolute": "19%",
+      "peranno": "9%"
+    }
+  ]
+}

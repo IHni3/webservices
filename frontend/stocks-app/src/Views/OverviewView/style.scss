@@ -1,0 +1,31 @@
+.stock-item {
+  padding: 0px 30px 0px 30px;
+  margin: 10px 0 10px 0;
+  &-info {
+    margin-right: auto;
+    &-name {
+      font-size: 25px;
+    }
+    &-id {
+      font-size: 12px;
+    }
+    &-status {
+    }
+  }
+
+  &-price {
+    font-size: 25px;
+    margin: auto;
+  }
+
+  span {
+    padding: 5px;
+  }
+
+  .positive {
+    color: #25de00;
+  }
+  .negative {
+    color: #de0000;
+  }
+}
