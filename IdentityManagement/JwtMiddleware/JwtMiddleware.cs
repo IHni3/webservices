@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IdentityManagement.Services;
 
-namespace IdentityManagement.JwtMiddleware
+namespace IdentityManagement.AuthMiddleware
 {
     public class JwtMiddleware
     {

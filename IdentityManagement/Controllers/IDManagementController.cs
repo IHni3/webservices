@@ -66,5 +66,11 @@ namespace IdentityManagement.Controllers
 			return BadRequest();
 			
 		}
+
+		[Authorize]
+		[HttpGet("checkToken")]
+		public IActionResult CheckToken(){
+			return Ok("Autorized");
+		}
 	}
 }

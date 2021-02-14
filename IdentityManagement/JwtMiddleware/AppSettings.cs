@@ -1,4 +1,4 @@
-namespace IdentityManagement.JwtMiddleware
+namespace IdentityManagement.AuthMiddleware
 {
     public class AppSettings
     {

@@ -9,7 +9,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 
 
-using IdentityManagement.JwtMiddleware;
+using IdentityManagement.AuthMiddleware;
 
 namespace IdentityManagement.Services
 {
