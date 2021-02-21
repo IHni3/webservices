@@ -34,6 +34,8 @@ namespace Glue
                                             opt.UseInMemoryDatabase("PlottingList"));
             services.AddDbContext<SearchContext>(opt =>
                                             opt.UseInMemoryDatabase("SearchList"));
+            services.AddDbContext<ExchangeContext>(opt =>
+                                            opt.UseInMemoryDatabase("ExchangeList"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
