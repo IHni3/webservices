@@ -154,3 +154,4 @@ C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\Glue\Glue\Glue\obj\Debug\ne
 C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\Glue\Glue\Glue\obj\Debug\net5.0\ref\Glue.dll
 C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\Glue\Glue\Glue\obj\Debug\net5.0\Glue.pdb
 C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\Glue\Glue\Glue\obj\Debug\net5.0\Glue.genruntimeconfig.cache
+C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\Glue\Glue\Glue\obj\Debug\net5.0\Glue.csprojAssemblyReference.cache
