@@ -49,9 +49,9 @@ namespace Glue.Controllers
                 string name = dat[3];
                 name = name.Substring(13, (name.Length - 15));
                 response.Name = name;      
-            }
+            }   
             #endregion
-
+                
             #region price resolving 
             // create CacheItem JSON and ask Cache about the Name resolving querry
             CacheItem cacheitemPrice = new CacheItem();
@@ -93,6 +93,8 @@ namespace Glue.Controllers
                 // calculating the difference between opening course and last course
                 float dif = (price / open) - 1;
                 response.Trend = dif;
+                dif = price - open;
+                response.Difference = dif;
             }
             #endregion
 

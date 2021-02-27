@@ -22,7 +22,7 @@ namespace Glue
 
         public static String GetCacheServiceURI()
         {
-            string cacheServiceURI = "https://localhost:44336/";
+            string cacheServiceURI = "https://localhost:5001/";
             return cacheServiceURI;
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
