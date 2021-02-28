@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QtXPaq0Z4EzQF6mVxAx+gK3jWd8LSR4LdpYP3c5iENNerazOWUVbe8jcC/6l3WlCDMehlXWUIk/zvaWfUiAXyQ==",
+  "dgSpecHash": "mvbXSYY1q7EvfMCTbShcb8XWDs+NcOPG1VXo3mfIJOizmBvGrbYo6sWFM7qYl2idak8osmqz7u9EfQ1xLzW2qQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\georg\\OneDrive\\Dokumente\\GitHub\\webservices\\CacheService\\CacheService\\CacheService.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,7 @@
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\5.0.1\\microsoft.visualstudio.web.codegeneration.5.0.1.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.contracts\\5.0.1\\microsoft.visualstudio.web.codegeneration.contracts.5.0.1.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\5.0.1\\microsoft.visualstudio.web.codegeneration.core.5.0.1.nupkg.sha512",

@@ -22,7 +22,7 @@ namespace Glue
 
         public static String GetCacheServiceURI()
         {
-            string cacheServiceURI = "https://localhost:5001/";
+            string cacheServiceURI = "http://host.docker.internal:5001/";
             return cacheServiceURI;
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -30,7 +30,7 @@ namespace Glue
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("https://localhost:5003/");
+                    //webBuilder.UseUrls("http://localhost:5003");
                 });
     }
 }
