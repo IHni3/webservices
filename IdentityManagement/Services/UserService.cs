@@ -18,7 +18,7 @@ namespace IdentityManagement.Services
         LoginResponse Login(LoginRequest request);        
 		String Update(UpdateRequest request);
 		String Delete(DeleteRequest request);
-		String Register(RegisterRequest request);
+		LoginResponse Register(RegisterRequest request);
         User GetById(int id);
     }
 	
@@ -33,7 +33,7 @@ namespace IdentityManagement.Services
 			_appSettings = appSettings.Value;
 		}
 
-        public string Register(RegisterRequest request){
+        public LoginResponse Register(RegisterRequest request){
             Random random = new Random();
 			int id;
 			bool taken = true;
@@ -44,7 +44,7 @@ namespace IdentityManagement.Services
 
 			// is the email an email?			
 			if (!emailRegex.IsMatch(request.Email)){
-				return "Email Address not valid";
+				return null;
 			} 
 
 			//Email taken?
@@ -54,7 +54,7 @@ namespace IdentityManagement.Services
 			//Generating Random UserID ////////////////
 
 			if (results.Count() > 0) {
-				return "Email already in use";
+				return null;
 			} 
 			
 			do {
@@ -81,7 +81,8 @@ namespace IdentityManagement.Services
 			_context.Users.Add(entry).ToString();
 			_context.SaveChanges();
 
-			return null;
+			return Login(new LoginRequest(entry.Email, entry.PasswordHash));
+
         }
 
         public string Update(UpdateRequest request){

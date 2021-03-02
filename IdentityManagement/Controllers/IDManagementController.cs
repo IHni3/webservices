@@ -31,15 +31,17 @@ namespace IdentityManagement.Controllers
 		[HttpPost("register")]
 		public IActionResult Register(RegisterRequest request){
 			var answer = _userService.Register(request);
-			if(answer == null){
-				return Ok();
+			if(answer != null){
+				return Ok(answer);
 			}
-			return BadRequest(answer);
+			return BadRequest();
 		}
 
 		[Authorize]
 		[HttpPatch("update")]
 		public IActionResult UpdateUser(UpdateRequest request){
+			var attatchedUser = (User)HttpContext.Items["User"];
+			if (attatchedUser == null || attatchedUser.Id != request.Id) return BadRequest();
 			var answer = _userService.Update(request);
 			if(answer == null){
 				return Ok();
@@ -50,6 +52,8 @@ namespace IdentityManagement.Controllers
 		[Authorize]
 		[HttpDelete("delete")]
 		public IActionResult DeleteUser(DeleteRequest request){
+			var attatchedUser = (User)HttpContext.Items["User"];
+			if (attatchedUser == null || attatchedUser.Id != request.Id) return BadRequest();
 			var answer = _userService.Delete(request);
 			if(answer == null){
 				return Ok();
@@ -70,7 +74,9 @@ namespace IdentityManagement.Controllers
 		[Authorize]
 		[HttpGet("checkToken")]
 		public IActionResult CheckToken(){
-			return Ok("Autorized");
+			var attachedUser = (User)HttpContext.Items["User"];
+			CheckResponse response = new CheckResponse(attachedUser);
+			return Ok(response);
 		}
 	}
 }
