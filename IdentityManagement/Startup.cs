@@ -44,8 +44,8 @@ namespace IdentityManagement
                     .AllowAnyHeader();
             }));
             
-            services.AddDbContext<UserContext>(opt =>
-                                               opt.UseInMemoryDatabase("Users"));
+            services.AddDbContext<UserContext>(options =>
+                options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
             
             services.AddControllers();
 
@@ -87,6 +87,7 @@ namespace IdentityManagement
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 

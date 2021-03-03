@@ -58,3 +58,7 @@
 /home/liam/Projects/Hochschule/webservices/webservices/IdentityManagement/obj/Debug/net5.0/ref/IdentityManagement.dll
 /home/liam/Projects/Hochschule/webservices/webservices/IdentityManagement/obj/Debug/net5.0/IdentityManagement.pdb
 /home/liam/Projects/Hochschule/webservices/webservices/IdentityManagement/obj/Debug/net5.0/IdentityManagement.genruntimeconfig.cache
+/home/liam/Projects/Hochschule/webservices/webservices/IdentityManagement/bin/Debug/net5.0/Npgsql.dll
+/home/liam/Projects/Hochschule/webservices/webservices/IdentityManagement/bin/Debug/net5.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/home/liam/Projects/Hochschule/webservices/webservices/IdentityManagement/bin/Debug/net5.0/Humanizer.dll
+/home/liam/Projects/Hochschule/webservices/webservices/IdentityManagement/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll
