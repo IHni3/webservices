@@ -469,3 +469,5 @@ C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\CacheService\CacheService\o
 C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\CacheService\CacheService\obj\Debug\net5.0\ref\CacheService.dll
 C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\CacheService\CacheService\obj\Debug\net5.0\CacheService.pdb
 C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\CacheService\CacheService\obj\Debug\net5.0\CacheService.genruntimeconfig.cache
+C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\CacheService\CacheService\bin\Debug\net5.0\Npgsql.dll
+C:\Users\georg\OneDrive\Dokumente\GitHub\webservices\CacheService\CacheService\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

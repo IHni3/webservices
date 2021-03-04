@@ -1,3 +1,5 @@
+START TRANSACTION;
+
 CREATE TABLE "CacheItems" (
     "ID" text NOT NULL,
     "Querry" text NULL,
@@ -6,6 +8,6 @@ CREATE TABLE "CacheItems" (
 );
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20210304180157_InitalMigration', '5.0.2');
+VALUES ('20210304182235_InitalMigration', '5.0.2');
 
 COMMIT;

@@ -26,8 +26,8 @@ public class Startup
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
-            services.AddDbContext<CacheContext>(opt =>
-                                               opt.UseInMemoryDatabase("CacheList"));
+            services.AddDbContext<CacheContext>(options =>
+                options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
 
             services.AddControllers();
         }
