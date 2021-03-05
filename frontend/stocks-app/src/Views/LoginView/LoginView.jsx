@@ -10,7 +10,7 @@ import { LoginMenubar } from "../../Menubars/LoginMenubar";
 
 import "./style.scss";
 
-export const LoginView = (props) => {
+export const LoginView = ({ className, onSubmitted }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +20,7 @@ export const LoginView = (props) => {
         <LoginMenubar />
       </header>
 
-      <Card className={"login-card " + props.className}>
+      <Card className={"login-card " + className}>
         <h1>Login</h1>
         <span className="p-float-label">
           <InputText
@@ -43,7 +43,13 @@ export const LoginView = (props) => {
           <Button className="p-button-text" id="register" label="Register" />
         </Link>
 
-        <Button id="login" label="Login" icon="pi pi-check" iconPos="right" />
+        <Button
+          id="login"
+          label="Login"
+          icon="pi pi-check"
+          iconPos="right"
+          onClick={(e) => onSubmitted(email, password)}
+        />
       </Card>
     </div>
   );

@@ -16,13 +16,15 @@ export const SingleStockMenubar = () => {
 
   const start = (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <i
-        className={"pi-angle-left pi"}
-        style={{ fontSize: "1.5em", marginRight: "15px" }}
-      />
-      <span style={{ fontWeight: 500, fontSize: "20px" }}>
-        iShares MSCI World (Acc)
-      </span>
+      <a href="/stocks" className="nolink">
+        <i
+          className={"pi-angle-left pi"}
+          style={{ fontSize: "1.5em", marginRight: "15px" }}
+        />
+        <span style={{ fontWeight: 500, fontSize: "20px" }}>
+          iShares MSCI World (Acc)
+        </span>
+      </a>
     </div>
   );
   const end = <InputText placeholder="Search" type="text" />;

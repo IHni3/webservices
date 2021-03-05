@@ -9,7 +9,7 @@ import { LoginMenubar } from "../../Menubars/LoginMenubar";
 
 import "./style.scss";
 
-export const RegisterView = (props) => {
+export const RegisterView = ({ className, onSubmitted }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordrepeat, setPasswordrepeat] = useState("");
@@ -22,7 +22,7 @@ export const RegisterView = (props) => {
         <LoginMenubar />
       </header>
 
-      <Card className={"register-card " + props.className}>
+      <Card className={"register-card " + className}>
         <h1>Register</h1>
         <span className="p-float-label">
           <InputText
@@ -70,7 +70,12 @@ export const RegisterView = (props) => {
           <label htmlFor="passwordrepeat">Repeat</label>
         </span>
 
-        <Button label="Submit" icon="pi pi-check" iconPos="right" />
+        <Button
+          label="Submit"
+          icon="pi pi-check"
+          iconPos="right"
+          onClick={() => onSubmitted(email, firstname, lastname, password)}
+        />
       </Card>
     </div>
   );

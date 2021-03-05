@@ -6,31 +6,48 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 import { SingleStockView } from "./Views/SingleStockView/SingleStockView";
-import { RegisterView } from "./Views/RegisterView/RegisterView";
-import { LoginView } from "./Views/LoginView/LoginView";
-import { BrowserRouter, Route, Switch, useParams } from "react-router-dom";
-import { OverviewView } from "./Views/OverviewView/OverviewView";
+import { Register } from "./Views/RegisterView/Register";
+import Login from "./Views/LoginView/Login";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import Overview from "./Views/OverviewView/Overview";
+
+import reducer from "./reducer";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+
+import AuthRoute from "./AuthRoute";
 
 function App() {
   PrimeReact.ripple = true;
 
+  const store = createStore(reducer);
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/login">
-            <LoginView className={"small-center-card"} />
-          </Route>
-          <Route path="/register">
-            <RegisterView className={"small-center-card"} />
-          </Route>
-          <Route path="/stocks">
-            <OverviewView />
-          </Route>
-          <Route path="/stock/:id" component={SingleStockView} />
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <BrowserRouter>
+          <Switch>
+            <AuthRoute path="/stocks" type="private">
+              <Overview />
+            </AuthRoute>
+            <AuthRoute
+              path="/stock/:id"
+              component={SingleStockView}
+              type="private"
+            />
+            <AuthRoute path="/login" type="guest">
+              <Login />
+            </AuthRoute>
+            <AuthRoute path="/register" type="guest">
+              <Register />
+            </AuthRoute>
+            <Route>
+              <Redirect to="/login" />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </Provider>
   );
 }
 

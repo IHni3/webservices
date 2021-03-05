@@ -41,3 +41,13 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+.nolink {
+  text-decoration: none;
+  color: var(--primary-color-text);
+}
+
+.blur {
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+}
