@@ -10,15 +10,18 @@ using Microsoft.Extensions.Options;
 
 
 using IdentityManagement.AuthMiddleware;
+using IdentityManagement.Models.Requests;
+using IdentityManagement.Models.Responses;
+using IdentityManagement.Models.Exceptions;
 
 namespace IdentityManagement.Services
 {
     public interface IUserService
     {
         LoginResponse Login(LoginRequest request);        
-		String Update(UpdateRequest request);
-		String Delete(DeleteRequest request);
-		String Register(RegisterRequest request);
+		void Update(UpdateRequest request);
+		void Delete(DeleteRequest request);
+		LoginResponse Register(RegisterRequest request);
         User GetById(int id);
     }
 	
@@ -33,7 +36,7 @@ namespace IdentityManagement.Services
 			_appSettings = appSettings.Value;
 		}
 
-        public string Register(RegisterRequest request){
+        public LoginResponse Register(RegisterRequest request){
             Random random = new Random();
 			int id;
 			bool taken = true;
@@ -44,7 +47,7 @@ namespace IdentityManagement.Services
 
 			// is the email an email?			
 			if (!emailRegex.IsMatch(request.Email)){
-				return "Email Address not valid";
+				throw new BadRequestException($"Email {request.Email} invalid!");
 			} 
 
 			//Email taken?
@@ -54,7 +57,7 @@ namespace IdentityManagement.Services
 			//Generating Random UserID ////////////////
 
 			if (results.Count() > 0) {
-				return "Email already in use";
+				throw new BadRequestException($"Email {request.Email} already in use!");
 			} 
 			
 			do {
@@ -81,15 +84,16 @@ namespace IdentityManagement.Services
 			_context.Users.Add(entry).ToString();
 			_context.SaveChanges();
 
-			return null;
+			return Login(new LoginRequest(entry.Email, entry.PasswordHash));
+
         }
 
-        public string Update(UpdateRequest request){
+        public void Update(UpdateRequest request){
             var results = _context.Users.
 								   Where(u => u.Id == request.Id);
 
             if (results.Count() < 1){
-                return "User not Found";
+                throw new BadRequestException($"User {request.Id} not found.");
             }
 
             var entry = results.First();
@@ -102,23 +106,20 @@ namespace IdentityManagement.Services
 			_context.Users.Update(entry).ToString();
 			_context.SaveChanges();
 
-			return null;
         }
 
-        public string Delete(DeleteRequest request){
+        public void Delete(DeleteRequest request){
             var results = _context.Users.
 								   Where(u => u.Id == request.Id);
 			
 			if (results.Count() < 1){
-                return "User not Found";
+                throw new BadRequestException($"User {request.Id} not found.");
             }
 
 			var entry = results.First();
 
             _context.Users.Remove(entry);
             _context.SaveChanges();
-
-            return null;
         }
 
         public LoginResponse Login(LoginRequest request){
@@ -127,7 +128,7 @@ namespace IdentityManagement.Services
 								   Where(u => u.Email == request.email);
 
 			if (results.Count() < 1 ){
-                return null;
+                throw new BadRequestException($"User {request.email} not found.");
 			}
 
 			var entry = results.First();			

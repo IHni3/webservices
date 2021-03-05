@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  iddb:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: iddb
+      POSTGRES_USER: iddb
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./iddb_init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  cachedb:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: cachedb
+      POSTGRES_USER: cachedb
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./cachedb_init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports: 
+      - "5432:5432"
+
+      
+  idmgmt:
+    image: "idmgmt"
+    environment:
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "password"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/idmgmt.pfx
+    depends_on: 
+      - iddb
+    expose: 
+      - "443"
+      
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./cert.crt:/etc/nginx/cert.crt:ro
+      - ./cert.rsa:/etc/nginx/cert.key:ro
+    depends_on:
+      - idmgmt
+    ports:
+      - "4000:4000"
+
+networks:
+  default:
+    driver: bridge

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lK4zJMGeW7hb+yDyyxVCxfXE5nXVBDfgBNgC6wHjxs0ni49pNev8culte5iYfA+RYe1CnB+YvxOwybRw8jqJQQ==",
+  "dgSpecHash": "NSZ6pE5C7fYkLVmaZ+bXhMVB+TFLP4zlNznCuJJTfRhZ2gRug1Qo/rmv07csdY8FGdoD26MIEQsfSAghJkeF6Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\georg\\OneDrive\\Dokumente\\GitHub\\webservices\\Glue\\Glue\\Glue\\Glue.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,7 @@
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\5.0.2\\microsoft.visualstudio.web.codegeneration.5.0.2.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.contracts\\5.0.2\\microsoft.visualstudio.web.codegeneration.contracts.5.0.2.nupkg.sha512",
     "C:\\Users\\georg\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\5.0.2\\microsoft.visualstudio.web.codegeneration.core.5.0.2.nupkg.sha512",

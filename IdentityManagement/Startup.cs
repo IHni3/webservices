@@ -37,8 +37,15 @@ namespace IdentityManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           services.AddDbContext<UserContext>(opt =>
-                                               opt.UseInMemoryDatabase("Users"));
+            services.AddCors(o => o.AddPolicy("AllOpen", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+            
+            services.AddDbContext<UserContext>(options =>
+                options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
             
             services.AddControllers();
 
@@ -80,8 +87,12 @@ namespace IdentityManagement
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
+
+            //Enable Cors for all Endpoints
+            app.UseCors("AllOpen");
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.

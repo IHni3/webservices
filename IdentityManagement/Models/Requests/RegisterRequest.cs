@@ -1,4 +1,4 @@
-namespace IdentityManagement.Models
+namespace IdentityManagement.Models.Requests
 {
     public class RegisterRequest{
         public string Email {get; set;}

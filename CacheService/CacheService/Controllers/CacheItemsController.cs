@@ -37,17 +37,17 @@ namespace CacheService.Controllers
         [HttpPost]
         public async Task<ActionResult<String>> GetCacheItem(CacheItem cacheItem)
         {
-            if (cacheItem.URL.Equals(null) || cacheItem.Querry.Equals(null))
+            if (cacheItem.ID.Equals(null) || cacheItem.Querry.Equals(null))
             {
                 throw new ArgumentNullException("CacheItem was null");
             }
             else
             {
-                int hash = (cacheItem.URL.GetHashCode()) + (cacheItem.Querry.GetHashCode());              
+                int hash = (cacheItem.ID.GetHashCode()) + (cacheItem.Querry.GetHashCode());              
                 var querry = Cache<CacheItem>.GetOrCreate(hash, () => cacheItem);
                 if (querry.Awnser.Equals(""))
                 {
-                    cacheItem.Awnser = Get(cacheItem.URL);
+                    cacheItem.Awnser = Get(cacheItem.ID);
                     querry = Cache<CacheItem>.GetOrCreate(hash, () => cacheItem);
                 }
                 return querry.Awnser;
