@@ -3,14 +3,13 @@ package com.example.stocks.core.domains;
 import com.google.gson.Gson;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class Stock
 {
 
-    private UUID id;
+    private Long id;
     private String isinNumber;
-    private UUID userId;
+    private Long userId;
     private static Gson gson;
 
 
@@ -19,18 +18,18 @@ public class Stock
         gson = new Gson();
     }
 
-    public Stock(UUID id, String isinNumber, UUID userId) {
+    public Stock(Long id, String isinNumber, Long userId) {
         this.id = id;
         this.isinNumber = isinNumber;
         this.userId = userId;
         gson = new Gson();
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,11 +41,11 @@ public class Stock
         this.isinNumber = isinNumber;
     }
 
-    public UUID getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

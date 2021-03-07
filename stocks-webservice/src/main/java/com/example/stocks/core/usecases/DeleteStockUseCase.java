@@ -1,7 +1,5 @@
 package com.example.stocks.core.usecases;
 
-import java.util.UUID;
-
 public class DeleteStockUseCase {
     private StocksDataProvider dataProvider;
 
@@ -10,7 +8,7 @@ public class DeleteStockUseCase {
         this.dataProvider = dataProvider;
     }
 
-    public void deleteStock(UUID id)
+    public void deleteStock(Long id)
     {
         dataProvider.deleteById(id);
     }

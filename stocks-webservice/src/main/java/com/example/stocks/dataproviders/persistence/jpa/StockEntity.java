@@ -1,23 +1,21 @@
 package com.example.stocks.dataproviders.persistence.jpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Table(name="stocks") //, schema = "myapp")
 public class StockEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
     private String isin;
-    private UUID userId;
+    private Long userId;
 
     protected StockEntity() {}
 
-    public StockEntity(UUID id, String isin, UUID userId) {
+    public StockEntity(Long id, String isin, Long userId) {
         this.id = id;
         this.isin = isin;
         this.userId = userId;
@@ -30,7 +28,7 @@ public class StockEntity {
                 id, isin, userId);
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -38,10 +36,10 @@ public class StockEntity {
         return isin;
     }
 
-    public UUID getUserId() {
+    public Long getUserId() {
         return userId;
     }
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,7 +47,7 @@ public class StockEntity {
         this.isin = isin;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

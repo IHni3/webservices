@@ -4,7 +4,6 @@ import com.example.stocks.core.domains.Stock;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class GetStocksUseCase {
     private StocksDataProvider dataProvider;
@@ -18,11 +17,11 @@ public class GetStocksUseCase {
     {
         return dataProvider.findAll();
     }
-    public List<Stock> findByUser(UUID userId)
+    public List<Stock> findByUser(Long userId)
     {
         return dataProvider.findByUser(userId);
     }
-    public Optional<Stock> findById(UUID id)
+    public Optional<Stock> findById(Long id)
     {
         return dataProvider.findById(id);
     }

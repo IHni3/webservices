@@ -7,9 +7,9 @@ import java.util.UUID;
 import java.util.Optional;
 
 public interface StocksDataProvider {
-    Optional<Stock> findById(UUID id);
-    void deleteById(UUID id);
-    List<Stock> findByUser(UUID userId);
+    Optional<Stock> findById(Long id);
+    void deleteById(Long id);
+    List<Stock> findByUser(Long userId);
     Stock save(Stock stock);
     List<Stock> findAll();
 }

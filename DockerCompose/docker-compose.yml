@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  stocks:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: stocks
+      POSTGRES_USER: stock
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./iddb_init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5500:5432"
+
   iddb:
     image: postgres:latest
     environment:
@@ -9,7 +20,7 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./iddb_init.sql:/docker-entrypoint-initdb.d/init.sql
-  
+
   cachedb:
     image: postgres:latest
     environment:
@@ -18,21 +29,20 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./cachedb_init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports: 
+    ports:
       - "5432:5432"
 
-      
   idmgmt:
     image: "idmgmt"
     environment:
       ASPNETCORE_URLS: "https://+:443;http://+:80"
       ASPNETCORE_Kestrel__Certificates__Default__Password: "password"
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/idmgmt.pfx
-    depends_on: 
+    depends_on:
       - iddb
-    expose: 
+    expose:
       - "443"
-      
+
   nginx:
     image: nginx
     volumes:

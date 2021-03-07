@@ -4,7 +4,6 @@ import com.example.stocks.core.domains.Stock;
 import com.example.stocks.core.usecases.StocksDataProvider;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -46,15 +45,16 @@ public class JpaStocksDataProvider implements StocksDataProvider {
     }
 
 
-    public Optional<Stock> findById(UUID id) {
+    public Optional<Stock> findById(Long id) {
         Optional<StockEntity> entity = repository.findById(id);
         return entity.map(JpaStocksDataProvider::toDto);
     }
 
     public Stock save(Stock dto) {
-        if (dto.getId() == null) {
-            dto.setId(UUID.randomUUID());
-        }
+        //if (dto.getId() == null) {
+        //    dto.setId(UUID.randomUUID());
+        //}
+
         StockEntity entity = toEntity(dto);
         entity = repository.save(entity);
         return toDto(entity);
@@ -65,12 +65,12 @@ public class JpaStocksDataProvider implements StocksDataProvider {
         return toDtoList(repository.findAll());
     }
 
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
     @Override
-    public List<Stock> findByUser(UUID userId) {
+    public List<Stock> findByUser(Long userId) {
         return toDtoList(repository.findByUserId(userId));
     }
 
