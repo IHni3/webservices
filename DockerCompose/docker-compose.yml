@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  stocks:
+  stocksdb:
     image: postgres:latest
     environment:
       POSTGRES_DB: stocks
@@ -9,8 +9,6 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./iddb_init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5500:5432"
 
   iddb:
     image: postgres:latest
@@ -33,7 +31,6 @@ services:
       - "5432:5432"
 
   idmgmt:
-    image: "idmgmt"
     build: ../IdentityManagement
     environment:
       ASPNETCORE_URLS: "https://+:443;http://+:80"
@@ -43,6 +40,11 @@ services:
       - iddb
     expose:
       - "443"
+
+  stocks:
+    build: ../stocks-webservice
+    expose:
+      - "8080"
 
   hostess:
     image: nginx
