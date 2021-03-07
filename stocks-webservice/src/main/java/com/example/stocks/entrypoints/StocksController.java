@@ -9,13 +9,11 @@ import com.example.stocks.dataproviders.persistence.jpa.JpaStocksDataProvider;
 import com.example.stocks.dataproviders.persistence.jpa.StocksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +24,9 @@ public class StocksController {
     DeleteStockUseCase deleteStockUseCase;
     GetStocksUseCase getStocksUseCase;
     StocksRepository repository;
+
+    private static final String identityManagementUrl = "https://hostess:4000/idmgmt/";
+    private static final String identityManagementCheckUrl = identityManagementUrl + "user/checkToken";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -48,7 +49,7 @@ public class StocksController {
             headers.set("Authorization", userToken);
             HttpEntity<String> jwtEntity = new HttpEntity<String>(headers);
             try {
-                ResponseEntity<User> responseEntity = restTemplate.exchange("https://localhost:8001/user/checkToken", HttpMethod.GET, jwtEntity, User.class);
+                ResponseEntity<User> responseEntity = restTemplate.exchange(identityManagementCheckUrl, HttpMethod.GET, jwtEntity, User.class);
 
                 if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
                     var user = responseEntity.getBody();
@@ -73,15 +74,16 @@ public class StocksController {
         }
     }
 
-    @RequestMapping(value = "/stocks/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Stock> delete(String userToken, @PathVariable("id") Long id) {
+    @RequestMapping(value = "/stocks/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    public ResponseEntity<Stock> delete(@PathVariable("id") Long id, @RequestBody String userToken) {
 
         if (!userToken.isEmpty()) {
             HttpHeaders headers = getHeaders();
             headers.set("Authorization", userToken);
             HttpEntity<String> jwtEntity = new HttpEntity<String>(headers);
             try {
-                ResponseEntity<User> responseEntity = restTemplate.exchange("https://localhost:8001/user/checkToken", HttpMethod.GET, jwtEntity, User.class);
+                ResponseEntity<User> responseEntity = restTemplate.exchange(identityManagementCheckUrl, HttpMethod.GET, jwtEntity, User.class);
 
                 if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
                     var user = responseEntity.getBody();
@@ -112,8 +114,8 @@ public class StocksController {
 
     }
 
-    @RequestMapping(value = "/stocks", method = RequestMethod.PUT)
-    public ResponseEntity<Stock> put(String userToken, String isin) {
+    @RequestMapping(value = "/stocks", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Stock> put(@RequestBody String userToken,@RequestBody String isin) {
 
 
         if (!userToken.isEmpty()) {
@@ -121,7 +123,7 @@ public class StocksController {
             headers.set("Authorization", userToken);
             HttpEntity<String> jwtEntity = new HttpEntity<String>(headers);
             try {
-                ResponseEntity<User> responseEntity = restTemplate.exchange("https://localhost:8001/user/checkToken", HttpMethod.GET, jwtEntity, User.class);
+                ResponseEntity<User> responseEntity = restTemplate.exchange(identityManagementCheckUrl, HttpMethod.GET, jwtEntity, User.class);
 
                 if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
                     var user = responseEntity.getBody();
