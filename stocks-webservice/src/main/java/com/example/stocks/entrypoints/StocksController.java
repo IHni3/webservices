@@ -74,7 +74,7 @@ public class StocksController {
         }
     }
 
-    @RequestMapping(value = "/stocks/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/stocks/{id}", method = RequestMethod.DELETE)
 
     public ResponseEntity<Stock> delete(@PathVariable("id") Long id, @RequestBody String userToken) {
 
@@ -114,7 +114,7 @@ public class StocksController {
 
     }
 
-    @RequestMapping(value = "/stocks", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/stocks", method = RequestMethod.PUT)
     public ResponseEntity<Stock> put(@RequestBody String userToken,@RequestBody String isin) {
 
 
