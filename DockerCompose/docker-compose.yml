@@ -38,13 +38,13 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/idmgmt.pfx
     depends_on:
       - iddb
-    expose:
-      - "443"
+
 
   stocks:
     build: ../stocks-webservice
-    expose:
-      - "8080"
+    depends_on: 
+      - stocksdb
+      - idmgmt
 
   hostess:
     image: nginx
@@ -54,8 +54,10 @@ services:
       - ./cert.rsa:/etc/nginx/cert.key:ro
     depends_on:
       - idmgmt
+      - stocks
     ports:
       - "4000:4000"
+      - "4001:4001"
 
 networks:
   default:
