@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["CacheService/CacheService.csproj", "CacheService/"]
+COPY ["./CacheService.csproj", "CacheService/"]
 RUN dotnet restore "CacheService/CacheService.csproj"
 COPY . .
 WORKDIR "/src/CacheService"

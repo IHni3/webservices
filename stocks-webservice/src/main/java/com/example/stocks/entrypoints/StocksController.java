@@ -25,7 +25,7 @@ public class StocksController {
     GetStocksUseCase getStocksUseCase;
     StocksRepository repository;
 
-    private static final String identityManagementUrl = "https://hostess:4000/idmgmt/";
+    private static final String identityManagementUrl = "https://hostess:4000/";
     private static final String identityManagementCheckUrl = identityManagementUrl + "user/checkToken";
 
     @Autowired
