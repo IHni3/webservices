@@ -7,8 +7,8 @@ services:
       POSTGRES_DB: stocks
       POSTGRES_USER: stock
       POSTGRES_PASSWORD: password
-    volumes:
-      - ./iddb_init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5555:5432"
 
   iddb:
     image: postgres:latest

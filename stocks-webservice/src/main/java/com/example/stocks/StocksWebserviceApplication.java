@@ -7,6 +7,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +19,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
 @SpringBootApplication
-public class StocksWebserviceApplication {
+public class StocksWebserviceApplication  extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(StocksWebserviceApplication.class, args);
@@ -47,7 +48,6 @@ public class StocksWebserviceApplication {
         RestTemplate restTemplate = new RestTemplate(requestFactory);
         return restTemplate;
     }
-
 
 }
 
