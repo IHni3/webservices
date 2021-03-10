@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -75,7 +74,6 @@ public class StocksController {
     }
 
     @RequestMapping(value = "/stocks/{id}", method = RequestMethod.DELETE)
-
     public ResponseEntity<Stock> delete(@PathVariable("id") Long id, @RequestBody String userToken) {
 
         if (!userToken.isEmpty()) {
@@ -111,16 +109,15 @@ public class StocksController {
         }
 
 
-
     }
 
     @RequestMapping(value = "/stocks", method = RequestMethod.PUT)
-    public ResponseEntity<Stock> put(@RequestBody String userToken,@RequestBody String isin) {
+    public ResponseEntity<Stock> put(@RequestBody PutObject putObject) {
 
 
-        if (!userToken.isEmpty()) {
+        if (!putObject.getUserToken().isEmpty()) {
             HttpHeaders headers = getHeaders();
-            headers.set("Authorization", userToken);
+            headers.set("Authorization", putObject.getUserToken());
             HttpEntity<String> jwtEntity = new HttpEntity<String>(headers);
             try {
                 ResponseEntity<User> responseEntity = restTemplate.exchange(identityManagementCheckUrl, HttpMethod.GET, jwtEntity, User.class);
@@ -132,7 +129,7 @@ public class StocksController {
 
                     var stock = new Stock();
                     stock.setUserId(userId);
-                    stock.setIsinNumber(isin);
+                    stock.setIsinNumber(putObject.getIsin());
 
                     Stock savedPerson = createStockUseCase.create(stock);
                     return new ResponseEntity<>(savedPerson, HttpStatus.OK);
@@ -165,4 +162,33 @@ public class StocksController {
     }
 
 
+}
+
+class PutObject {
+
+    public PutObject() { }
+
+    public PutObject(String userToken, String isin) {
+        this.userToken = userToken;
+        this.isin = isin;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public String getIsin() {
+        return isin;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
+
+    public void setIsin(String isin) {
+        this.isin = isin;
+    }
+
+    private String userToken;
+    private String isin;
 }
