@@ -7,8 +7,8 @@ services:
       POSTGRES_DB: stocks
       POSTGRES_USER: stock
       POSTGRES_PASSWORD: password
-    ports:
-      - "5555:5432"
+    volumes:
+      - ./stocksdb_init.sql:/docker-entrypoint-initdb.d/init.sql
 
   iddb:
     image: postgres:latest
@@ -38,11 +38,12 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Path: /app/certs/idmgmt.pfx
     depends_on:
       - iddb
-
-
+      
   stocks:
-    build: ../stocks-webservice
-    depends_on: 
+    build: ../stock-webservice
+    environment:
+      ASPNETCORE_URLS: "http://+:80"
+    depends_on:
       - stocksdb
       - idmgmt
 
@@ -54,7 +55,6 @@ services:
       - ./cert.rsa:/etc/nginx/cert.key:ro
     depends_on:
       - idmgmt
-      - stocks
     ports:
       - "4000:4000"
       - "4001:4001"
