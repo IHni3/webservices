@@ -4,7 +4,7 @@ namespace IdentityManagement.Models
 {
     public class User {
         public int id {get; set;}
-        public IList<string> isins {get; set;}
+        public List<string> isins {get; set;}
         
     }
 }

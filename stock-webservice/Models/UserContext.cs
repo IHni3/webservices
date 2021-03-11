@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System;
 
@@ -20,7 +22,7 @@ namespace IdentityManagement.Models
             .Property(u => u.isins)
             .HasConversion(
                 v => string.Join(',', v),
-                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList());
         }       
     }
 }

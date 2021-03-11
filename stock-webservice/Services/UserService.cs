@@ -19,6 +19,8 @@ using IdentityManagement.Models.Requests;
 using IdentityManagement.Models.Responses;
 using IdentityManagement.Models.Exceptions;
 
+using System.Collections.Generic;
+
 namespace IdentityManagement.Services
 {
     public interface IUserService
@@ -51,6 +53,7 @@ namespace IdentityManagement.Services
             if (results.Count() == 0){
                 User user = new User();
                 user.id = id;
+                user.isins = new List<string>();
                 user.isins.Add(request.isin);
 
                 _context.Add(user);
@@ -74,9 +77,11 @@ namespace IdentityManagement.Services
                 throw new UserNotFoundException();
             } else {
                 User user = results.First();
-                user.isins.Remove(request.isin);
-                _context.Update(user);
-                _context.SaveChanges();
+                if (user.isins.Contains(request.isin)){
+                    user.isins.Remove(request.isin);
+                    _context.Update(user);
+                    _context.SaveChanges();
+                }               
             }
         }
 

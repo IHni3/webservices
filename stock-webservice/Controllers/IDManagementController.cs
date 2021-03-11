@@ -35,7 +35,7 @@ namespace IdentityManagement.Controllers
 		public IActionResult Add(ManipulationRequest request){
 			try{
 				_userService.Add(request);
-				return Accepted();
+				return Ok();
 			} catch(UnauthorizedException e) {
 				return Unauthorized();
 			} catch(BadRequestException e){
@@ -49,7 +49,7 @@ namespace IdentityManagement.Controllers
 		public IActionResult Remove(ManipulationRequest request){
 			try{
 				_userService.Remove(request);
-				return Accepted();
+				return Ok();
 			} catch(UnauthorizedException e) {
 				return Unauthorized();
 			} catch(BadRequestException e){
@@ -61,11 +61,11 @@ namespace IdentityManagement.Controllers
 			
 		}
 
-		[HttpGet("getList")]
+		[HttpPost("getList")]
 		public IActionResult GetList(ListRequest request){
 			try{
-				_userService.GetList(request);
-				return Accepted();
+			 	var response = _userService.GetList(request);
+				return Ok(response);
 			} catch(UnauthorizedException e) {
 				return Unauthorized();
 			} catch(BadRequestException e){
