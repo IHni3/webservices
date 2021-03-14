@@ -24,7 +24,7 @@ namespace Glue.Controllers
 
             // create CacheItem JSON and ask Cache about the Name resolving querry
             CacheItem cacheitemName = new CacheItem();
-            cacheitemName.url = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=" + id + "&apikey=" + apiKey;
+            cacheitemName.ID = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=" + id + "&apikey=" + apiKey;
             cacheitemName.Querry = "";
             cacheitemName.Awnser = "";
             string jsonName = JsonConvert.SerializeObject(cacheitemName);

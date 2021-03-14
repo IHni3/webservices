@@ -22,7 +22,7 @@ namespace Glue.Controllers
             List<SearchItem> searchAwnsers = new List<SearchItem>();
             // create CacheItem JSON and ask Cache about the querry
             CacheItem cacheitem = new CacheItem();
-            cacheitem.url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + search + "&apikey=" + apiKey;
+            cacheitem.ID = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + search + "&apikey=" + apiKey;
             cacheitem.Querry = "";
             cacheitem.Awnser = "";
             string json = JsonConvert.SerializeObject(cacheitem);

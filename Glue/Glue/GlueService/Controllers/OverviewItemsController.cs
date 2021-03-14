@@ -63,7 +63,7 @@ namespace Glue.Controllers
                 #region name resolving
                 // create CacheItem JSON and ask Cache about the Name resolving querry
                 CacheItem cacheitemName = new CacheItem();
-                cacheitemName.url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol + "&apikey=" + apiKey;
+                cacheitemName.ID = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol + "&apikey=" + apiKey;
                 cacheitemName.Querry = "";
                 cacheitemName.Awnser = "";
                 jsonName = JsonConvert.SerializeObject(cacheitemName);
@@ -97,7 +97,7 @@ namespace Glue.Controllers
                 #region price resolving 
                 // create CacheItem JSON and ask Cache about the Name resolving querry
                 CacheItem cacheitemPrice = new CacheItem();
-                cacheitemPrice.url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + apiKey;
+                cacheitemPrice.ID = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=5min&apikey=" + apiKey;
                 cacheitemPrice.Querry = "";
                 cacheitemPrice.Awnser = "";
                 string jsonPrice = JsonConvert.SerializeObject(cacheitemPrice);
