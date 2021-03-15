@@ -16,12 +16,12 @@ namespace Glue.Controllers
         List<string> symbols = new List<string>();
 
 
-        [HttpGet("{id}")]
-        public List<OverviewItem> GetOverviewItems(string id)
+        [HttpGet("{token}")]
+        public List<OverviewItem> GetOverviewItems(string token)
         {
 
-            // id is now token of user
-            string jsonName = "{\"token\": \"" + id + "\"}";
+            // token is now token of user
+            string jsonName = "{\"token\": \"" + token + "\"}";
 
 
             // send request and json body to StockService

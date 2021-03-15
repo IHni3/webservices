@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/liam/Projects/Hochschule/webservices/webservices/stock-webservice/Stocks.csproj": {}
+    "C:\\Users\\georg\\OneDrive\\Dokumente\\GitHub\\webservices\\stock-webservice\\Stocks.csproj": {}
   },
   "projects": {
-    "/home/liam/Projects/Hochschule/webservices/webservices/stock-webservice/Stocks.csproj": {
+    "C:\\Users\\georg\\OneDrive\\Dokumente\\GitHub\\webservices\\stock-webservice\\Stocks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/liam/Projects/Hochschule/webservices/webservices/stock-webservice/Stocks.csproj",
+        "projectUniqueName": "C:\\Users\\georg\\OneDrive\\Dokumente\\GitHub\\webservices\\stock-webservice\\Stocks.csproj",
         "projectName": "Stocks",
-        "projectPath": "/home/liam/Projects/Hochschule/webservices/webservices/stock-webservice/Stocks.csproj",
-        "packagesPath": "/home/liam/.nuget/packages/",
-        "outputPath": "/home/liam/Projects/Hochschule/webservices/webservices/stock-webservice/obj/",
+        "projectPath": "C:\\Users\\georg\\OneDrive\\Dokumente\\GitHub\\webservices\\stock-webservice\\Stocks.csproj",
+        "packagesPath": "C:\\Users\\georg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\georg\\OneDrive\\Dokumente\\GitHub\\webservices\\stock-webservice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/liam/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\georg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -87,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

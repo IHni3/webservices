@@ -52,7 +52,7 @@ namespace Glue
                     PlottingItem tht = new PlottingItem();
                     tht.Date = date;
                     tht.Price = course;
-                    tht.ID = id;
+                    tht.Symbol = id;
                     plottingAwnsers.Add(tht);
                 }
             }

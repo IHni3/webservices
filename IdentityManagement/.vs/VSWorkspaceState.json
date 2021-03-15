@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bin",
+    "\\Controllers",
+    "\\JwtMiddleware",
+    "\\Migrations",
+    "\\Models",
+    "\\Models\\Requests",
+    "\\Models\\Responses",
+    "\\obj",
+    "\\Properties"
+  ],
+  "SelectedNode": "\\Controllers\\IDManagementController.cs",
+  "PreviewInSolutionExplorer": false
+}

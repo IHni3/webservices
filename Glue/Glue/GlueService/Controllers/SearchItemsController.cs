@@ -57,7 +57,7 @@ namespace Glue.Controllers
                     string b1 = dat[2];
                     b1 = b1.Substring(24, (b1.Length-26));
                     SearchItem awnser = new SearchItem();
-                    awnser.ID = a1;
+                    awnser.Symbol = a1;
                     awnser.Name = b1;
                     searchAwnsers.Add(awnser);
                 }

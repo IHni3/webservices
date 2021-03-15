@@ -8,9 +8,9 @@ namespace Glue.Controllers
     [ApiController]
     public class PlottingItemsController : ControllerBase
     {
-        // GET: api/PlottingItems/id/intervall
-        [HttpGet("{id}, {intervall}")]
-        public List<PlottingItem> GetPlottingItem(string id, string intervall)
+        // GET: api/PlottingItems/symbol/intervall
+        [HttpGet("{symbol}, {intervall}")]
+        public List<PlottingItem> GetPlottingItem(string symbol, string intervall)
         {
             List<PlottingItem> plottingAwnsers = new List<PlottingItem>();
 
@@ -18,27 +18,27 @@ namespace Glue.Controllers
             {
                 case "today":
                     DayPlott dayPlott = new DayPlott();
-                    plottingAwnsers = dayPlott.GetPlott(id, intervall);
+                    plottingAwnsers = dayPlott.GetPlott(symbol, intervall);
                     break;
 
                 case "month":
                     MonthPlott monthPlott = new MonthPlott();
-                    plottingAwnsers = monthPlott.GetPlott(id, intervall);
+                    plottingAwnsers = monthPlott.GetPlott(symbol, intervall);
                     break;
 
                 case "6month":
                     SixMonthPlott sixMonthPlott = new SixMonthPlott();
-                    plottingAwnsers = sixMonthPlott.GetPlott(id, intervall, 26);
+                    plottingAwnsers = sixMonthPlott.GetPlott(symbol, intervall, 26);
                     break;
 
                 case "year":
                     SixMonthPlott yearPlott = new SixMonthPlott();
-                    plottingAwnsers = yearPlott.GetPlott(id, intervall, 52);
+                    plottingAwnsers = yearPlott.GetPlott(symbol, intervall, 52);
                     break;
 
                 case "max":
                     MaxPlott maxPlott = new MaxPlott();
-                    plottingAwnsers = maxPlott.GetPlott(id, intervall);
+                    plottingAwnsers = maxPlott.GetPlott(symbol, intervall);
                     break;
             }
             // return PlottingItem List

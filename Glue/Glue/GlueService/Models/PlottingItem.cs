@@ -6,6 +6,6 @@ namespace Glue.Models
     {
         public float Price { get; set; }
         public String Date { get; set; }
-        public String ID { get; set; }
+        public String Symbol { get; set; }
     }
 }
