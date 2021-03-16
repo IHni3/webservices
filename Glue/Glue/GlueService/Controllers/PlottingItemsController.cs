@@ -9,7 +9,8 @@ namespace Glue.Controllers
     public class PlottingItemsController : ControllerBase
     {
         // GET: api/PlottingItems/symbol/intervall
-        [HttpGet("{symbol}, {intervall}")]
+       // [HttpGet("{symbol}, {intervall}")]
+        [HttpPost]
         public List<PlottingItem> GetPlottingItem(string symbol, string intervall)
         {
             List<PlottingItem> plottingAwnsers = new List<PlottingItem>();

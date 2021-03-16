@@ -15,7 +15,8 @@ namespace Glue.Controllers
 
 
         // GET: api/ExchangeItems/currencyCode
-        [HttpGet("{currencyCode}")]
+        [HttpPost]
+      //  [HttpGet("{currencyCode}")]
         public ExchangeItem GetExchangeItem(string currencyCode)
         {
             ExchangeItem response = new ExchangeItem();

@@ -16,7 +16,8 @@ namespace Glue.Controllers
         string cacheServiceURI = Program.GetCacheServiceURI();
 
         // GET: api/SearchItems/SearchTerm
-        [HttpGet("{search}")]
+       // [HttpGet("{search}")]
+        [HttpPost]
         public List<SearchItem> GetSearchItems(string search)
         {
             List<SearchItem> searchAwnsers = new List<SearchItem>();

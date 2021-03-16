@@ -16,7 +16,9 @@ namespace Glue.Controllers
         List<string> symbols = new List<string>();
 
 
-        [HttpGet("{token}")]
+       // [HttpGet("{token}")]
+
+        [HttpPost]
         public List<OverviewItem> GetOverviewItems(string token)
         {
 
