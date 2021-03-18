@@ -14,17 +14,18 @@ namespace Glue.Controllers
         string cacheServiceURI = Program.GetCacheServiceURI();
 
 
-        // GET: api/ExchangeItems/id
-        [HttpGet("{id}")]
-        public ExchangeItem GetExchangeItem(string id)
+        // GET: api/ExchangeItems/currencyCode
+        [HttpPost]
+      //  [HttpGet("{currencyCode}")]
+        public ExchangeItem GetExchangeItem(string currencyCode)
         {
             ExchangeItem response = new ExchangeItem();
-            response.ID = id;
+            response.CurrencyCode = currencyCode;
 
 
             // create CacheItem JSON and ask Cache about the Name resolving querry
             CacheItem cacheitemName = new CacheItem();
-            cacheitemName.ID = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=" + id + "&apikey=" + apiKey;
+            cacheitemName.ID = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=" + currencyCode + "&apikey=" + apiKey;
             cacheitemName.Querry = "";
             cacheitemName.Awnser = "";
             string jsonName = JsonConvert.SerializeObject(cacheitemName);

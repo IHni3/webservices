@@ -61,7 +61,7 @@ namespace Glue
                     // cutting of the time stamp, leaving only the date
                     reference = reference.Substring(0, (reference.Length - 9));
                     tht.Price = course;
-                    tht.ID = id;
+                    tht.Symbol = id;
                     plottingAwnsers.Add(tht);
                     i++;
                 } while (reference.Equals(today));
