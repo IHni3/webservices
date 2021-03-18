@@ -41,6 +41,8 @@ namespace Glue
                                             opt.UseInMemoryDatabase("SearchList"));
             services.AddDbContext<ExchangeContext>(opt =>
                                             opt.UseInMemoryDatabase("ExchangeList"));
+            services.AddDbContext<TableItemContext>(opt =>
+                                            opt.UseInMemoryDatabase("TableList"));
 
             services.AddControllers();           
         }
