@@ -128,7 +128,7 @@ namespace IdentityManagement.Services
 								   Where(u => u.Email == request.email);
 
 			if (results.Count() < 1 ){
-                throw new BadRequestException($"User {request.email} not found.");
+                throw new BadRequestException($"User or Password invalid");
 			}
 
 			var entry = results.First();			
@@ -138,7 +138,7 @@ namespace IdentityManagement.Services
 				return new LoginResponse(entry, token);
 			}
 
-			return null;
+			throw new BadRequestException($"User or Password invalid");
         }
 
         public User GetById(int id){
