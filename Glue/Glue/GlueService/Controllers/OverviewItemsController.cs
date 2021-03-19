@@ -152,7 +152,11 @@ namespace Glue.Controllers
                 return overview;
             } catch (Exception e)
             {
+                Response.StatusCode = 400;
                 List<OverviewItem> overview = new List<OverviewItem>();
+                OverviewItem fail = new OverviewItem();
+                fail.Name = "Wrong input from User, may be the Symbol";
+                overview.Add(fail);
                 return overview;
             }
 }

@@ -68,6 +68,10 @@ namespace Glue.Controllers
             }
             catch (Exception e)
             {
+                Response.StatusCode = 400;
+                SearchItem fail = new SearchItem();
+                fail.Name = "Wrong Userinput";
+                searchAwnsers.Add(fail);
                 return searchAwnsers;
             }
         }

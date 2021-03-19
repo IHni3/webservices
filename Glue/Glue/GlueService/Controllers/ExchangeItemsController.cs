@@ -67,8 +67,10 @@ namespace Glue.Controllers
                 }
                 return response;
             } catch (Exception e)
-            {                
+            {
+                Response.StatusCode = 400;
                 ExchangeItem response = new ExchangeItem();
+                response.CurrencyCode = "Wrong Userinput";
                 return response;
             }
         }       
