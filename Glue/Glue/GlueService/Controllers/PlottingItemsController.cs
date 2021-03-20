@@ -46,6 +46,10 @@ namespace Glue.Controllers
             return plottingAwnsers;
         } catch (Exception e)
             {
+                Response.StatusCode = 400;
+                PlottingItem fail = new PlottingItem();
+                fail.Symbol = "Wron Userinput";
+                plottingAwnsers.Add(fail);
                 return plottingAwnsers;
             }
 }        

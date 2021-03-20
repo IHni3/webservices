@@ -128,6 +128,10 @@ namespace GlueService.Controllers
             }
             catch (Exception e)
             {
+                Response.StatusCode = 400;
+                TableItem fail = new TableItem();
+                fail.Period = "Wrong Userinput";
+                tableAwnsers.Add(fail);
                 return tableAwnsers;
             }
         }
