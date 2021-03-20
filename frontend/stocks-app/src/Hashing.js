@@ -1,7 +1,12 @@
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 
-export class Pbkdf2Hashing {
+export class BCrypt {
   generateHash(text) {
-    return bcrypt.hashSync(text, 4);
+    return text;
+    //return bcrypt.hashSync(text, 4);
+  }
+
+  checkHash(password, hash) {
+    return bcrypt.compareSync(password, hash);
   }
 }

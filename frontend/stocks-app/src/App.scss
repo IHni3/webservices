@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #355be6 !important;
+}
+
 .App,
 html,
 #root,
@@ -50,4 +54,8 @@ a {
 .blur {
   filter: blur(4px);
   -webkit-filter: blur(4px);
+}
+
+.p-button-blue {
+  background-color: var(--primary-color);
 }

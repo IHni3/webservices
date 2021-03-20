@@ -5,75 +5,68 @@ import { Card } from "primereact/card";
 import { StocksMenubar } from "../../Menubars/StocksMenubar";
 import { Page } from "../../Page/Page";
 
-import { SearchView } from "../SearchView/SearchView";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 import "./style.scss";
 
 export const OverviewView = (props) => {
-  const [showSearch, setShowSearch] = useState();
+  const loading = props.loading ? props.loading : false;
 
-  return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <header className={showSearch ? "blur" : ""}>
-        <StocksMenubar
-          onAddClicked={(e) => setShowSearch(!showSearch)}
-          onLogoutClicked={() => {
-            props.onLogout();
-            console.log("hereerree");
-          }}
-        />
-      </header>
-      <SearchView
-        visible={showSearch}
-        onSubmit={(value) => console.log(value)}
-      />
-      <Page className={showSearch ? "blur" : ""}>
+  let stockItems;
+
+  if (props.items) {
+    stockItems = props.items.map((item) => {
+      console.log("item", item);
+      return (
         <StockItem
-          name={"IShares EME (Acc)"}
-          id={"LU12937486767"}
-          status_abs={"5,03USD"}
-          status_perc={"0,03%"}
-          price={"120 USD"}
-          positive={true}
+          key={item.id}
+          name={item.name}
+          id={item.id}
+          status_abs={item.status_abs}
+          status_perc={item.status_perc}
+          price={item.price}
+          positive={item.positive}
+          timestamp={item.timestamp}
         />
-        <StockItem
-          name={"IShares EME (Acc)"}
-          id={"LU12937486767"}
-          status_abs={"5,03USD"}
-          status_perc={"0,03%"}
-          price={"120 USD"}
-          positive={true}
-        />
-        <StockItem
-          name={"IShares EME (Acc)"}
-          id={"LU12937486767"}
-          status_abs={"5,03USD"}
-          status_perc={"0,03%"}
-          price={"120 USD"}
-          positive={false}
-        />
-        <StockItem
-          name={"IShares EME (Acc)"}
-          id={"LU12937486767"}
-          status_abs={"5,03USD"}
-          status_perc={"0,03%"}
-          price={"120 USD"}
-          positive={false}
-        />
-        <StockItem
-          name={"IShares EME (Acc)"}
-          id={"LU12937486767"}
-          status_abs={"5,03USD"}
-          status_perc={"0,03%"}
-          price={"120 USD"}
-          positive={false}
-        />
-      </Page>
-    </div>
-  );
+      );
+    });
+  } else {
+    console.error("items undefined!");
+  }
+
+  if (props)
+    return (
+      <div style={{ width: "100%", height: "100%" }}>
+        <header>
+          <StocksMenubar
+            onAddClicked={() => (window.location.href = "/search")}
+            onLogoutClicked={() => {
+              props.onLogout();
+            }}
+          />
+        </header>
+        <Page>
+          {loading == true ? (
+            <ProgressSpinner style={{ display: "flex", marginTop: 20 }} />
+          ) : stockItems.length > 0 ? (
+            stockItems
+          ) : (
+            <Card className={"stock-item"}>No items saved..</Card>
+          )}
+        </Page>
+      </div>
+    );
 };
 
-function StockItem({ name, id, status_abs, status_perc, price, positive }) {
+function StockItem({
+  name,
+  id,
+  status_abs,
+  status_perc,
+  price,
+  positive,
+  timestamp,
+}) {
   return (
     <Card className={"stock-item"}>
       <a href={"stock/" + id} className={"nolink"}>
@@ -81,6 +74,7 @@ function StockItem({ name, id, status_abs, status_perc, price, positive }) {
           <div className={"stock-item-info flex-col"}>
             <span className={"stock-item-info-name"}>{name}</span>
             <span className={"stock-item-info-id"}>{id}</span>
+            <span className="stock-item-info-timestamp">{timestamp}</span>
             <span
               className={
                 positive
@@ -88,7 +82,7 @@ function StockItem({ name, id, status_abs, status_perc, price, positive }) {
                   : "stock-item-info-status negative"
               }
             >
-              {status_perc} {status_abs}
+              {status_perc}% {status_abs}$
             </span>
           </div>
           <div className={"flex-col"}>
@@ -99,7 +93,7 @@ function StockItem({ name, id, status_abs, status_perc, price, positive }) {
                   : "stock-item-price negative"
               }
             >
-              {price}
+              {price}$
             </span>
           </div>
         </div>

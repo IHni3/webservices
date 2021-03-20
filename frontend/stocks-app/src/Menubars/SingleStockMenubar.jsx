@@ -2,7 +2,7 @@ import React from "react";
 import { Menubar } from "primereact/menubar";
 import { InputText } from "primereact/inputtext";
 
-export const SingleStockMenubar = () => {
+export const SingleStockMenubar = ({ title }) => {
   const items = [
     {
       label: "File",
@@ -21,9 +21,7 @@ export const SingleStockMenubar = () => {
           className={"pi-angle-left pi"}
           style={{ fontSize: "1.5em", marginRight: "15px" }}
         />
-        <span style={{ fontWeight: 500, fontSize: "20px" }}>
-          iShares MSCI World (Acc)
-        </span>
+        <span style={{ fontWeight: 500, fontSize: "20px" }}>{title}</span>
       </a>
     </div>
   );
