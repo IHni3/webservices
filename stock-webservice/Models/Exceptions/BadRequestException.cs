@@ -1,6 +1,6 @@
 using System;
 
-namespace IdentityManagement.Models.Exceptions
+namespace Stocks.Models.Exceptions
 {
     public class BadRequestException : Exception
     {

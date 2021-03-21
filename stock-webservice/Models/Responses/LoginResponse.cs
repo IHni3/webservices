@@ -1,4 +1,4 @@
-namespace IdentityManagement.Models.Responses
+namespace Stocks.Models.Responses
 {
     public class LoginResponse
     {

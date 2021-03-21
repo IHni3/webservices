@@ -1,4 +1,4 @@
-namespace IdentityManagement.Models.Requests
+namespace Stocks.Models.Requests
 {
     public class ListRequest {
 

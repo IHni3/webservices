@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -19,11 +18,11 @@ using Swashbuckle.AspNetCore;
 using Microsoft.OpenApi.Models;
 
 
-using IdentityManagement.Models;
-using IdentityManagement.Services;
+using Stocks.Models;
+using Stocks.Services;
 
 
-namespace IdentityManagement
+namespace Stocks
 {
     public class Startup
     {

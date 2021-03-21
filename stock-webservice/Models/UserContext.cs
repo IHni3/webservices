@@ -5,7 +5,7 @@ using System.Text.Json;
 using System;
 
 
-namespace IdentityManagement.Models
+namespace Stocks.Models
 {
     public class UserContext : DbContext
     {

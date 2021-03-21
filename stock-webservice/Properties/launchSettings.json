@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "IdentityManagement": {
+    "Stocks": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
