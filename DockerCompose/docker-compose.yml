@@ -1,0 +1,88 @@
+version: "3"
+
+services:
+  stocksdb:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: stocks
+      POSTGRES_USER: stock
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./stocksdb_init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  iddb:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: iddb
+      POSTGRES_USER: iddb
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./iddb_init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  cachedb:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: cachedb
+      POSTGRES_USER: cachedb
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./cachedb_init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  idmgmt:
+    build: ../IdentityManagement
+    environment:
+      ASPNETCORE_URLS: "http://+:80"
+    depends_on:
+      - iddb
+
+  stocks:
+    build: ../stock-webservice
+    environment:
+      ASPNETCORE_URLS: "http://+:80"
+    depends_on:
+      - stocksdb
+      - idmgmt
+
+  glue:
+    build: ../Glue/Glue/GlueService
+    environment:
+      ASPNETCORE_URLS: "http://+:80"
+    depends_on:
+      - idmgmt
+      - stocks
+      - cache
+
+  cache:
+    build: ../CacheService/CacheService
+    environment:
+      ASPNETCORE_URLS: "http://+:80"
+    depends_on:
+      - cachedb
+
+  frontend:
+    build: ../frontend/stocks-app
+    depends_on:
+      - idmgmt
+      - glue
+      - stocks
+
+  hostess:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./cert.crt:/etc/nginx/cert.crt:ro
+      - ./cert.rsa:/etc/nginx/cert.key:ro
+    depends_on:
+      - idmgmt
+      - stocks
+      - frontend
+    ports:
+      - "4080:4080"
+      - "4000:4000"
+      - "4001:4001"
+      - "4002:4002"
+      - "4003:4003"
+
+networks:
+  default:
+    driver: bridge
