@@ -1,7 +1,7 @@
 import { ExchangeItemsApi, Configuration } from "../GlueApi";
 
 let config = new Configuration();
-config.basePath = "http://hostess:4002";
+config.basePath = "http://localhost:4002";
 
 let api = new ExchangeItemsApi(config);
 

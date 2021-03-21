@@ -34,6 +34,7 @@ export const Search = (props) => {
         setLoading(false);
       })
       .catch((e) => {
+        setSearchItems([]);
         setLoading(false);
         console.log(e);
       });
