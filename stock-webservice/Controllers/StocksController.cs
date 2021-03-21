@@ -6,25 +6,25 @@ using System.Text.Json.Serialization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using IdentityManagement.Models;
-using IdentityManagement.Services;
-using IdentityManagement.Models.Requests;
-using IdentityManagement.Models.Responses;
-using IdentityManagement.Models.Exceptions;
+using Stocks.Models;
+using Stocks.Services;
+using Stocks.Models.Requests;
+using Stocks.Models.Responses;
+using Stocks.Models.Exceptions;
 
-namespace IdentityManagement.Controllers
+namespace Stocks.Controllers
 {
 	[ApiController]
 	[Route("stocks")]
-	public class IdentityManagementController : ControllerBase
+	public class StocksController : ControllerBase
 	{
-		private readonly ILogger<IdentityManagementController> _logger;
+		private readonly ILogger<StocksController> _logger;
 
 		private readonly UserContext _context;
 
 		private readonly IUserService _userService;
 
-		public IdentityManagementController(ILogger<IdentityManagementController> logger, UserContext context, IUserService userService)
+		public StocksController(ILogger<StocksController> logger, UserContext context, IUserService userService)
 		{
 			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 			_context = context;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace IdentityManagement.Models
+namespace Stocks.Models
 {
     public class User {
         public int id {get; set;}

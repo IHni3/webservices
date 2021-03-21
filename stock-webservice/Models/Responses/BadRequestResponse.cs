@@ -1,6 +1,6 @@
-using IdentityManagement.Models.Exceptions;
+using Stocks.Models.Exceptions;
 
-namespace IdentityManagement.Models.Responses
+namespace Stocks.Models.Responses
 {
     public class BadRequestResponse
     {

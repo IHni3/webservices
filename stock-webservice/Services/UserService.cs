@@ -1,5 +1,5 @@
 using System;
-using IdentityManagement.Models;
+using Stocks.Models;
 using System.Text.RegularExpressions;
 using System.Linq;
 using Microsoft.IdentityModel.Tokens;
@@ -15,13 +15,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-using IdentityManagement.Models.Requests;
-using IdentityManagement.Models.Responses;
-using IdentityManagement.Models.Exceptions;
+using Stocks.Models.Requests;
+using Stocks.Models.Responses;
+using Stocks.Models.Exceptions;
 
 using System.Collections.Generic;
 
-namespace IdentityManagement.Services
+namespace Stocks.Services
 {
     public interface IUserService
     {       
