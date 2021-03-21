@@ -75,8 +75,9 @@ services:
     depends_on:
       - idmgmt
       - stocks
+      - frontend
     ports:
-      - "4080:3000"
+      - "4080:4080"
       - "4000:4000"
       - "4001:4001"
       - "4002:4002"
