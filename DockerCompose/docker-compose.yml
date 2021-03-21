@@ -34,7 +34,7 @@ services:
       ASPNETCORE_URLS: "http://+:80"
     depends_on:
       - iddb
-      
+
   stocks:
     build: ../stock-webservice
     environment:
@@ -45,7 +45,7 @@ services:
 
   glue:
     build: ../Glue/Glue/GlueService
-    environment: 
+    environment:
       ASPNETCORE_URLS: "http://+:80"
     depends_on:
       - idmgmt
@@ -59,6 +59,13 @@ services:
     depends_on:
       - cachedb
 
+  frontend:
+    build: ../frontend/stocks-app
+    depends_on:
+      - idmgmt
+      - glue
+      - stocks
+
   hostess:
     image: nginx
     volumes:
@@ -69,6 +76,7 @@ services:
       - idmgmt
       - stocks
     ports:
+      - "4080:3000"
       - "4000:4000"
       - "4001:4001"
       - "4002:4002"

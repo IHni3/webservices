@@ -1,10 +1,10 @@
 import { SET_LOADER } from "./actions/ui";
-import { LOGIN, LOGOUT } from "./actions/auth";
+import { LOGIN, LOGOUT, LOGIN_SUCCESS, LOGIN_FAILED } from "./actions/auth";
 import { API_SUCCESS, API_ERROR } from "./actions/api";
 
-import identityManagementApiInstance from "./identityManagementApiInstance";
+import identityManagementApiInstance from "./ApiInstances/identityManagementApiInstance";
 
-import { Pbkdf2Hashing } from "./Hashing";
+import { BCrypt } from "./Hashing";
 
 export default (
   state = {
@@ -19,12 +19,45 @@ export default (
   switch (action.type) {
     case LOGIN: {
       const user = action.payload;
-      const token = login(user);
-      return { ...state, isAuthUser: token !== null, user: { token: token } };
+
+      state.loginFailed = false;
+
+      login(user)
+        .then((e) => {
+          if (e !== null) {
+            state.user = e;
+            state.loginFailed = false;
+            action.asyncDispatch({ type: LOGIN_SUCCESS });
+          } else {
+            state.error.text = "Invalid login credentials!";
+            action.asyncDispatch({ type: LOGIN_FAILED });
+          }
+        })
+        .catch((e) => {});
+
+      /*if (token === null) {
+        state.error = "Invalid login credentials!";
+        return { ...state, isAuthUser: false, user: {} };
+      } else {
+        return { ...state, isAuthUser: true, user: { token: token } };
+      }*/
+
+      return { ...state, loggingIn: true };
+    }
+    case LOGIN_SUCCESS: {
+      return { ...state, isAuthUser: true };
+    }
+
+    case LOGIN_FAILED: {
+      console.log(LOGIN_FAILED, state);
+      return {
+        ...state,
+        isAuthUser: false,
+        loginFailed: true,
+      };
     }
 
     case API_SUCCESS:
-      //localStorage.setItem("user", JSON.stringify(action.payload.user));
       return { ...state, isAuthUser: true, user: action.payload.user };
     case API_ERROR:
       return { ...state, error: action.payload };
@@ -39,7 +72,7 @@ export default (
 };
 
 async function login(user) {
-  const hashing = new Pbkdf2Hashing();
+  const hashing = new BCrypt();
 
   const request = {
     email: user.email,
@@ -47,15 +80,18 @@ async function login(user) {
   };
 
   let token = null;
-
-  await identityManagementApiInstance
-    .userLoginPost(request)
-    .then((response) => {
-      response.json().then((data) => {
-        localStorage.setItem("user_token", data.token);
-        token = data.token;
-      });
-    });
-
-  return token;
+  try {
+    var obj = await identityManagementApiInstance.userLoginPost(request);
+    if (obj.ok) {
+      const data = await obj.json();
+      const token = data.token;
+      localStorage.setItem("user_token", token);
+      return token;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 }

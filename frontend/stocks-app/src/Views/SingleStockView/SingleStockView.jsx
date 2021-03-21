@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
@@ -9,31 +9,46 @@ import { SingleStockMenubar } from "../../Menubars/SingleStockMenubar";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
-import ProductService from "./ProductService";
-
 import { Page } from "../../Page/Page";
 
 import "./style.scss";
 
-export const SingleStockView = (props) => {
-  const id = props.match.params.id;
+export const SingleStockView = ({
+  plottingItems,
+  overviewItem,
+  tableItems,
+  onTimePeriodChanged,
+}) => {
+  const title = overviewItem.name ? overviewItem.name : "";
+  const plotTitle = overviewItem.name ? overviewItem.name : "";
+  const price = overviewItem.price ? "$" + overviewItem.price : "$ -";
+  const timeStamp = overviewItem.timeStamp ? overviewItem.timeStamp : "-";
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <header>
-        <SingleStockMenubar />
+        <SingleStockMenubar title={title} />
       </header>
       <Page className={"single-stock-view"}>
         <Card className={"single-stock-view-card"}>
+          <h2 style={{ marginBottom: 5 }}>Current Price: {price}</h2>
+          <span style={{ fontSize: 14 }}>{timeStamp}</span>
+        </Card>
+
+        <Card className={"single-stock-view-card"}>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <CurrencySelect />
-            <TimePeriodSelect />
+            <TimePeriodSelect onTimePeriodChanged={onTimePeriodChanged} />
           </div>
         </Card>
         <Card className={"single-stock-view-card"}>
-          <StockChart />
+          <StockChart
+            labels={plottingItems.labels}
+            data={plottingItems.data}
+            title={plotTitle}
+          />
         </Card>
         <Card className={"single-stock-view-card"}>
-          <DataTableBasicDemo />
+          <DataTableBasicDemo items={tableItems} />
         </Card>
         <Card className={"single-stock-view-card"}>
           <PerformanceIndicators />
@@ -51,54 +66,94 @@ function CurrencySelect() {
     </span>
   );
 }
-function TimePeriodSelect() {
+function TimePeriodSelect({ onTimePeriodChanged }) {
   return (
-    <span className={"p-buttonset"}>
-      <Button label="1M" />
-      <Button label="3M" />
-      <Button label="6M" />
-      <Button label="1J" />
-      <Button label="MAX" />
+    <span className={"p-buttonset"} style={{ width: "100%", marginBottom: 0 }}>
+      <Button
+        label="1D"
+        className="p-button-blue"
+        onClick={() => onTimePeriodChanged("today")}
+        style={{ width: "20%" }}
+      />
+      <Button
+        label="1M"
+        className="p-button-blue"
+        onClick={() => onTimePeriodChanged("month")}
+        style={{ width: "20%" }}
+      />
+      <Button
+        label="6M"
+        className="p-button-blue"
+        onClick={() => onTimePeriodChanged("6month")}
+        style={{ width: "20%" }}
+      />
+      <Button
+        label="1Y"
+        className="p-button-blue"
+        className="p-button-blue"
+        onClick={() => onTimePeriodChanged("year")}
+        style={{ width: "20%" }}
+      />
+      <Button
+        label="MAX"
+        className="p-button-blue"
+        onClick={() => onTimePeriodChanged("max")}
+        style={{ width: "20%" }}
+      />
     </span>
   );
 }
-function StockChart() {
+function StockChart({ labels, data, title }) {
+  console.log(data);
+
   const options = {
     title: {
       display: true,
-      text: "My Title",
-      fontSize: 16,
+      text: title,
+      fontSize: 18,
     },
     legend: {
-      position: "bottom",
+      display: false,
+    },
+    scales: {
+      xAxes: [
+        {
+          ticks: {
+            display: false,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ticks: {
+            // Include a dollar sign in the ticks
+            callback: function (value, index, values) {
+              return "$" + value;
+            },
+          },
+        },
+      ],
     },
   };
 
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+  const plotData = {
+    labels: labels,
     datasets: [
       {
-        label: "Second Dataset",
-        data: [28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86, 27, 90],
+        data: data,
         fill: false,
-        borderColor: "#B89B44",
+        borderColor: "#355BE6",
       },
     ],
   };
 
-  return <Chart type="line" data={data} options={options} />;
+  return <Chart type="line" data={plotData} options={options} />;
 }
-function PerformanceIndicators(/*params: type*/) {
+function PerformanceIndicators() {
   const data = [
-    { key: "Velocity", value: "27,01%" },
-    { key: "Tracking Error", value: "4,74%" },
-    { key: "Shape Ratio", value: "12,3%" },
-    { key: "test1", value: "value1" },
-    { key: "test1", value: "value1" },
-    { key: "test1", value: "value1" },
-    { key: "test1", value: "value1" },
-    { key: "test1", value: "value1" },
-    { key: "test1", value: "value1" },
+    { key: "Velocity", value: "- %" },
+    { key: "Tracking Error", value: "- %" },
+    { key: "Shape Ratio", value: "- %" },
   ];
 
   const content = data.map((d) => (
@@ -121,21 +176,24 @@ function PerformanceIndicators(/*params: type*/) {
   );
 }
 
-const DataTableBasicDemo = () => {
-  const [products, setProducts] = useState([]);
-  const productService = new ProductService();
+const DataTableBasicDemo = ({ items }) => {
+  let displayedItems = [];
 
-  useEffect(() => {
-    productService.getProductsSmall().then((data) => setProducts(data));
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  items.forEach((element) => {
+    displayedItems.push({
+      period: element.period,
+      abs: Math.round(element.abs * 100) / 100 + "%",
+      perAnno: Math.round(element.perAnno * 100) / 100 + "%",
+    });
+  });
 
   return (
     <div>
       <div className="card">
-        <DataTable value={products}>
+        <DataTable value={displayedItems}>
           <Column field="period" header="period"></Column>
-          <Column field="absolute" header="absolute"></Column>
-          <Column field="peranno" header="p. a."></Column>
+          <Column field="abs" header="absolute"></Column>
+          <Column field="perAnno" header="p. a."></Column>
         </DataTable>
       </div>
     </div>
