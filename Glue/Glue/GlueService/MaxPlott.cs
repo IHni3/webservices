@@ -40,7 +40,7 @@ namespace Glue
                 //divide Json to single piece and cutoff escape characters and other unwanted stuff.
                 var result = streamReader.ReadToEnd();
                 string[] dat = result.Split('\n');
-                // calculating how many weeks of data there is and getting them all
+                // calculating how many months of data there is and getting them all
                 int total = ((dat.Length - 8) / 7);
                 for (int i = 0; i < total; i++)
                 {

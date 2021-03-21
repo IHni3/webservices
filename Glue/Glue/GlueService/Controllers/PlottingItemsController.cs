@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Glue.Models;
+using System;
 
 namespace Glue.Controllers
 {
@@ -8,12 +9,11 @@ namespace Glue.Controllers
     [ApiController]
     public class PlottingItemsController : ControllerBase
     {
-        // GET: api/PlottingItems/symbol/intervall
-       // [HttpGet("{symbol}, {intervall}")]
         [HttpPost]
         public List<PlottingItem> GetPlottingItem(string symbol, string intervall)
         {
             List<PlottingItem> plottingAwnsers = new List<PlottingItem>();
+            try { 
 
             switch (intervall)
             {
@@ -44,6 +44,14 @@ namespace Glue.Controllers
             }
             // return PlottingItem List
             return plottingAwnsers;
-        }        
+        } catch (Exception e)
+            {
+                Response.StatusCode = 400;
+                PlottingItem fail = new PlottingItem();
+                fail.Symbol = "Wron Userinput";
+                plottingAwnsers.Add(fail);
+                return plottingAwnsers;
+            }
+}        
     }
 }

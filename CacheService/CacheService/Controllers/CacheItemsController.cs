@@ -13,6 +13,7 @@ namespace CacheService.Controllers
     [ApiController]
     public class CacheItemsController : ControllerBase
     {
+      
         private readonly CacheContext _context;
 
         public CacheItemsController(CacheContext context)
@@ -37,20 +38,29 @@ namespace CacheService.Controllers
         [HttpPost]
         public async Task<ActionResult<String>> GetCacheItem(CacheItem cacheItem)
         {
-            if (cacheItem.ID.Equals(null) || cacheItem.Querry.Equals(null))
+            try
             {
-                throw new ArgumentNullException("CacheItem was null");
-            }
-            else
-            {
-                int hash = (cacheItem.ID.GetHashCode()) + (cacheItem.Querry.GetHashCode());              
-                var querry = Cache<CacheItem>.GetOrCreate(hash, () => cacheItem);
-                if (querry.Awnser.Equals(""))
+                if (cacheItem.ID.Equals(null) || cacheItem.Querry.Equals(null))
                 {
-                    cacheItem.Awnser = Get(cacheItem.ID);
-                    querry = Cache<CacheItem>.GetOrCreate(hash, () => cacheItem);
+                    throw new ArgumentNullException("CacheItem was null");
                 }
-                return querry.Awnser;
+                else
+                {
+                    int hash = (cacheItem.ID.GetHashCode()) + (cacheItem.Querry.GetHashCode());
+                    var querry = Cache<CacheItem>.GetOrCreate(hash, () => cacheItem);
+                    if (querry.Awnser.Equals(""))
+                    {
+                        cacheItem.Awnser = Get(cacheItem.ID);
+                        querry = Cache<CacheItem>.GetOrCreate(hash, () => cacheItem);
+                    }
+                    return querry.Awnser;
+                }
+            } catch
+            {
+                Response.StatusCode = 400;
+                CacheItem fail = new CacheItem();
+                fail.Awnser = "Wrong Userinput";
+                return fail.Awnser;
             }
         }
 
@@ -67,6 +77,6 @@ namespace CacheService.Controllers
             {
                 return reader.ReadToEnd();
             }
-        }
+        }   
     }
 }

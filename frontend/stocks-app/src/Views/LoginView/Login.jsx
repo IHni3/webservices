@@ -1,26 +1,50 @@
-import React, { useState, Dispatch } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { LoginView } from "./LoginView";
 
 import { login } from "../../actions/auth";
 
-export class Login extends React.Component {
-  constructor() {
-    super();
+import { Toast } from "primereact/toast";
+
+export function Login(props) {
+  const myToast = useRef(null);
+
+  console.log(props);
+
+  useEffect(() => {
+    if (props.loginFailed === true)
+      showToast("error", "Login", props.error.text);
+  }, [props.loginFailed]);
+
+  function showToast(severityValue, summaryValue, detailValue) {
+    myToast.current.show({
+      severity: severityValue,
+      summary: summaryValue,
+      detail: detailValue,
+    });
   }
 
-  render() {
-    return (
+  return (
+    <div>
+      <Toast ref={myToast} />
       <LoginView
         className={"small-center-card"}
-        onSubmitted={(email, password) =>
-          this.props.login({ email: email, password: password })
-        }
-        isAuthUser={this.props.isAuthUser}
+        onSubmitted={(email, password) => {
+          props.login({ email: email, password: password });
+        }}
+        isAuthUser={props.isAuthUser}
       ></LoginView>
-    );
-  }
+    </div>
+  );
 }
 
-export default connect(({ isAuthUser }) => ({ isAuthUser }), { login })(Login);
+const mapStateToProps = ({ isAuthUser, loginFailed, error }) => ({
+  isAuthUser,
+  loginFailed,
+  error,
+});
+
+export default connect(mapStateToProps, {
+  login,
+})(Login);
