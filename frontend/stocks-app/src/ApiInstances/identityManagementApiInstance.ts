@@ -4,7 +4,7 @@ import {
 } from "../IdentityManagementApi/";
 
 let config = new Configuration();
-config.basePath = "http://localhost:4000";
+config.basePath = "http://localhost:6001";
 
 let api = new IdentityManagementApi(config);
 
